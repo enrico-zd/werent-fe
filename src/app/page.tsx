@@ -1,5 +1,4 @@
-import CardReview from "@/components/CardReview/CardReview";
-import Image from "next/image";
+import CardReview from "@/components/review/CardReview";
 
 export default function Home() {
   return (
