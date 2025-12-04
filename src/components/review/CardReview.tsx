@@ -45,7 +45,7 @@ const CardReview = ({ review }: { review: Review }) => {
 
           <div>
             {/* beri icon 5 bintang */}
-            <p>{review.user.name}</p>
+            <p className="text-gray-900">{review.user.name}</p>
 
             {/* data body size contoh: 165cm 65kg 88/78/110 cm */}
             <p className="text-[11px] text-gray-400">
@@ -56,7 +56,7 @@ const CardReview = ({ review }: { review: Review }) => {
         </div>
 
         {/* tombol icon like dan lable review review */}
-        <div className="flex flex-row items-center gap-1">
+        <div className="flex flex-row items-center gap-1 text-gray-700">
           <button
             onClick={() => handleLikeClick(dataReview.id)}
             className="flex items-center gap-1 text-sm font-semibold hover:opacity-70 transition-opacity"
@@ -78,7 +78,7 @@ const CardReview = ({ review }: { review: Review }) => {
       </div>
 
       {/* text review dari user */}
-      <div>
+      <div className="text-gray-900">
         {reviewFullView ? reviewText : reviewText.substring(0, 150)}
         {!reviewFullView && longReviewText && "..."}
 

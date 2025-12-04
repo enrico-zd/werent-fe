@@ -71,7 +71,7 @@ export default function ProductDetail() {
       <div className="max-w-4xl lg:max-w-full mx-auto lg:mx-6 px-6 py-6 lg:px-0">
         {/* Product Title & Rating */}
         <div className="mb-4">
-          <h1 className="text-2xl font-bold">{dataProduct.name}</h1>
+          <h1 className="text-2xl font-bold text-gray-900">{dataProduct.name}</h1>
           <p className="text-xl font-semibold text-gray-700">
             Rp {dataProduct.price?.toLocaleString("id-ID")}
           </p>
@@ -88,14 +88,14 @@ export default function ProductDetail() {
 
         {/* Size */}
         <div className="flex flex-col">
-          <button className="text-sm justify-start w-fit pb-2">
+          <button className="text-sm justify-start w-fit pb-2 text-gray-700">
             AVAILABLE SIZE
           </button>
           <div>
             {dataProduct.sizes.map((size, i) => (
               <button
                 key={i}
-                className="text-sm w-10 py-2 mr-2 text-center border hover:outline hover:outline-offset-4"
+                className="text-sm w-10 py-2 mr-2 text-center text-gray-900 border border-gray-900 hover:outline hover:outline-gray-900 hover:outline-offset-4"
               >
                 {size}
               </button>
@@ -108,7 +108,7 @@ export default function ProductDetail() {
         {/* Reviews Section */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold">
+            <h2 className="text-xl font-bold text-gray-900">
               REVIEWS ({dataReviewSummary.totalReviews})
             </h2>
             <Link
@@ -131,7 +131,7 @@ export default function ProductDetail() {
             {Object.entries(dataReviewSummary.fitDistribution).map(
               ([key, value]) => (
                 <div key={key} className="flex items-center gap-4">
-                  <span className="w-24 text-sm font-medium">{key}</span>
+                  <span className="w-24 text-sm text-gray-900 font-medium">{key}</span>
                   <div className="flex-1 bg-gray-300 rounded-full h-3 overflow-hidden">
                     <div
                       className="bg-green-700 h-full"
