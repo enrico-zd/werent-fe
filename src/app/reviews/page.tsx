@@ -13,7 +13,7 @@ export default async function ReviewsPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="sticky top-0 bg-white border-b border-gray-200 z-10">
-        <div className="flex items-center justify-between p-4 max-w-2xl mx-auto">
+        <div className="flex items-center justify-between p-2.5 max-w-2xl lg:max-w-full mx-auto lg:ml-6">
           <Link href="/" className="p-2 hover:bg-gray-100 rounded">
             <ChevronLeft className="w-6 h-6" />
           </Link>
@@ -25,7 +25,7 @@ export default async function ReviewsPage() {
       </div>
 
       {/* Rating Overview */}
-      <div className="border-b border-gray-200 p-4 max-w-2xl mx-auto">
+      <div className="border-b border-gray-200 p-4 max-w-2xl lg:max-w-full mx-auto lg:mx-6">
         <div className="flex items-start gap-6 mb-6">
           <div className="text-5xl w-16 text-center font-bold">
             {dataReviewSummary.overallRating.toFixed(1)}
@@ -74,7 +74,7 @@ export default async function ReviewsPage() {
       </div>
 
       {/* Review List */}
-      <div className="space-y-8 mt-6">
+      <div className="space-y-8 mt-6 lg:mx-6">
         {dataReviews.data.map((review) => (
           <div key={review.id} className="border-b-2 border-gray-300 pb-2">
             <CardReview review={review} />

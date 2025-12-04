@@ -1,10 +1,10 @@
-import CardProduct from "@/components/product/CardProduct";
-import CardReview from "@/components/review/CardReview";
+import ProductDetail from "@/components/product/ProductDetail";
+
 
 export default function Home() {
   return (
     <div>
-      <CardProduct />
+      <ProductDetail />
     </div>
   );
 }

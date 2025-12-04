@@ -16,7 +16,6 @@ const CardReview = ({ review }: { review: Review }) => {
   const longReviewText = reviewText.length > 150;
 
   const handleLikeClick = (reviewId: number) => {
-
     const isLiked = likedReviews.has(reviewId);
     const newLikedReviews = new Set(likedReviews);
 
@@ -34,7 +33,7 @@ const CardReview = ({ review }: { review: Review }) => {
     }));
   };
   return (
-    <div className="mx-2">
+    <div className="mx-4">
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-2">
           {/* menambah avatar user */}
@@ -114,7 +113,13 @@ const CardReview = ({ review }: { review: Review }) => {
       </div>
 
       {/* bulan, tanggal dan tahun dari review */}
-      <div>{review.createdAt}</div>
+      <div className="text-sm text-gray-500">
+        {new Date(review.createdAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </div>
     </div>
   );
 };

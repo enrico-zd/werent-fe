@@ -1,19 +1,61 @@
+"use client";
+
 import StarRate from "../review/StarRate";
 import { fetchProduct } from "@/service/ProductAPI";
 import Link from "next/link";
-import { fetchReviewSummary } from "@/service/ReviewAPI";
+import { createReview, fetchReviewSummary } from "@/service/ReviewAPI";
 import { totalDistValue } from "@/utils/totalDistValue";
+import ReviewModal from "../ReviewModal";
+import { Product, ReviewFormData, ReviewSummary } from "@/types";
+import { useEffect, useState } from "react";
+import ProductDetailSkeleton from "../ProductDetailSkeleton";
 
-export default async function ProductDetail() {
-  // const [reviews, setReviews] = useState(initialReviews)
+export default function ProductDetail() {
+  const [dataProduct, setDataProduct] = useState<Product>();
+  const [dataReviewSummary, setDataReviewSummary] = useState<ReviewSummary>();
+  const [token, setToken] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const productId = 2;
 
-  const dataProduct = await fetchProduct(2);
-  const dataReviewSummary = await fetchReviewSummary(2);
+  useEffect(() => {
+    // token dari localStorage
+    const t = localStorage.getItem("token");
+    setToken(t);
+
+    // fetch data product & review
+    const load = async () => {
+      const product = await fetchProduct(productId);
+      const summary = await fetchReviewSummary(productId);
+      setDataProduct(product);
+      setDataReviewSummary(summary);
+    };
+
+    load();
+  }, []);
+
+  // handle review submit
+  const handleReviewSubmit = async (review: ReviewFormData) => {
+    if (!token) {
+      alert("Silakan login dahulu.");
+      return;
+    }
+
+    try {
+      await createReview(productId, review, token);
+      alert("Review berhasil dikirim!");
+      setIsOpen(false);
+    } catch (err) {
+      console.error(err);
+      alert("Gagal mengirim review");
+    }
+  };
+
+  if (!dataProduct || !dataReviewSummary) {
+    return <ProductDetailSkeleton />;
+  }
 
   return (
     <div className="min-h-screen bg-white">
-      {/* navigation */}
-      <nav></nav>
       {/* Product Image Section */}
       <div className="relative bg-gray-100">
         <div className="h-96 flex items-center justify-center overflow-hidden">
@@ -26,7 +68,7 @@ export default async function ProductDetail() {
       </div>
 
       {/* Content Section */}
-      <div className="max-w-4xl mx-auto px-6 py-6 lg:px-0">
+      <div className="max-w-4xl lg:max-w-full mx-auto lg:mx-6 px-6 py-6 lg:px-0">
         {/* Product Title & Rating */}
         <div className="mb-4">
           <h1 className="text-2xl font-bold">{dataProduct.name}</h1>
@@ -116,20 +158,15 @@ export default async function ProductDetail() {
           </div>
 
           <div className="border-t border-gray-300 my-8" />
-
-          {/* Individual Reviews */}
-          {/* <div className="space-y-8">
-            {reviews.map((review) => (
-              <div key={review.id}>
-
-                <CardReview 
-                    review={review}
-                />
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
+
+      {/* Review Modal */}
+      {/* <ReviewModal 
+        isOpen={true}
+        onClose={() => {}}
+        onSubmit={handleReviewSubmit}
+      /> */}
     </div>
   );
 }

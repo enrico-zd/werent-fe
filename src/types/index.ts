@@ -56,27 +56,6 @@ export interface Review {
   isHelpful?: boolean;
 }
 
-// // Review
-// export interface Review {
-//   id: number;
-//   rating: number;
-//   content: string;
-//   waist: number;
-//   bust: number;
-//   hips: number;
-//   fit: FitType;
-//   createdAt: string;
-//   updatedAt: string;
-//   editedAt: string | null;
-//   user: {
-//     id: number;
-//     name: string;
-//     avatarUrl: string | null;
-//   };
-//   media: ReviewMedia[];
-//   helpfulCount: number;
-//   isHelpful?: boolean;
-// }
 
 // Review Media
 export interface ReviewMedia {
@@ -112,4 +91,19 @@ export interface PaginatedResponse<T> {
     limit: number;
     totalPages: number;
   };
+}
+
+export interface Login {
+  email: string;
+  password: string;
+}
+
+export interface ReviewFormData {
+  rating: number;
+  content: string;
+  waist?: number;
+  bust?: number;
+  hips?: number;
+  fit: FitType | "";
+  media: File[];
 }
