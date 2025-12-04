@@ -112,21 +112,21 @@ export default function ProductDetail() {
               REVIEWS ({dataReviewSummary.totalReviews})
             </h2>
 
-            <div>
+            <div className="flex justify-center items-center gap-4">
               {/* Button to open review modal */}
               <button
                 onClick={() => setIsOpen(true)}
-                className="text-sm font-bold text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800 transition"
+                className="hidden md:block text-sm font-bold text-white bg-black px-4 py-2 rounded-full hover:bg-gray-800 transition"
               >
                 + Add Review
               </button>
-            </div>
             <Link
               href="/reviews"
               className="text-green-700 font-semibold hover:underline"
             >
               View More &gt;
             </Link>
+          </div>
           </div>
 
           {/* Average Rating */}
@@ -171,6 +171,14 @@ export default function ProductDetail() {
         </div>
       </div>
 
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 z-40 md:hidden shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="w-full text-sm font-bold text-white bg-black px-4 py-3 rounded-lg hover:bg-gray-800 transition active:scale-95"
+        >
+          + Add Review
+        </button>
+      </div>
       {/* Review Modal */}
       <ReviewModal 
         isOpen={isOpen}

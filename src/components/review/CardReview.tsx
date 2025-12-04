@@ -4,6 +4,7 @@ import { FaThumbsUp } from "react-icons/fa";
 import StarRate from "./StarRate";
 import { useState } from "react";
 import { Review } from "@/types";
+import {X, Maximize2} from "lucide-react";
 
 const CardReview = ({ review }: { review: Review }) => {
   const [dataReview, setDataReview] = useState(review);
@@ -91,35 +92,59 @@ const CardReview = ({ review }: { review: Review }) => {
 
       {/* field gambar dari product review */}
       {review.media && review.media.length > 0 && (
-        <div>
-          {review.media.map((media, index) => (
-            <img
-              key={index}
-              src={media.url}
-              alt={`Review Image ${index}`}
-              onClick={() => setImageView(media.url)}
-            />
-          ))}
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-3 no-scrollbar">
+          {review.media.map((media, index) => {
+            const isVideo = media.url.endsWith(".mp4") || media.url.endsWith(".mov"); 
+            
+            return (
+              <div 
+                key={index} 
+                className="relative flex-shrink-0 group cursor-pointer w-20 h-20 rounded-lg overflow-hidden border border-gray-200"
+                onClick={() => setImageView(media.url)}
+              >
+                {isVideo ? (
+                   <video src={media.url} className="w-full h-full object-cover" />
+                ) : (
+                   <img
+                    src={media.url}
+                    alt={`Review ${index}`}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                )}
+                
+                {/* Icon saat diarahkan mouse */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                   <Maximize2 className="w-5 h-5 text-white drop-shadow-md" />
+                </div>
+              </div>
+            )
+          })}
         </div>
       )}
-      <div>
-        {imageView && (
-          <div onClick={() => setImageView(null)}>
-            <div>
-              <img src={imageView} alt="Full Preview" />
-            </div>
-          </div>
-        )}
-      </div>
 
-      {/* bulan, tanggal dan tahun dari review */}
-      <div className="text-sm text-gray-500">
-        {new Date(review.createdAt).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </div>
+      {/* Modal Full Screen Clicked Image */} 
+      {imageView && (
+        <div 
+          className="relative bg-white p-2 rounded-lg shadow-2xl max-w-3xl max-h-[85vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}  
+        >
+          {/* Button Close (X) */}
+          <button 
+             className="absolute -top-3 -right-3 p-1.5 bg-gray-700 text-white rounded-full hover:bg-gray-600 shadow-md transition-transform hover:scale-110 z-10"
+               onClick={() => setImageView(null)}
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          {/* Full Image */}
+          <img 
+            src={imageView} 
+            alt="Full Preview" 
+            className="max-w-full max-h-[80vh] object-contain rounded-md shadow-2xl"
+            onClick={(e) => e.stopPropagation()} 
+          />
+        </div>
+      )}
     </div>
   );
 };
