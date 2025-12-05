@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WeRent
+A simple and modern clothing rental platform built with **Next.js**, **TypeScript**, and **TailwindCSS**.
 
-## Getting Started
+---
 
-First, run the development server:
+## 🚀 Features
+
+### 🧑‍🤝‍🧑 Authentication  
+- Login system for users  
+- Protected actions (e.g., submitting reviews)
+
+### 👚 Product  
+- Product detail page with:
+  - Price  
+  - Description  
+  - Available sizes  
+  - Average rating  
+  - Fit scale summary  
+
+### ⭐ Review System  
+Users can:
+- Add rating (1–5 stars)
+- Write detailed comments  
+- Choose **fit type** (Runs Small, True to Size, Runs Large)  
+- Input measurements (Waist, Bust, Hips)  
+- See other users' reviews  
+- View aggregated fit statistics  
+
+### 📊 Fit Scale Visualization  
+- Fit categories (small / true / large)  
+- Percentage bars showing distribution based on user reviews  
+
+---
+
+## 🛠 Tech Stack
+
+| Layer       | Technology |
+|-------------|------------|
+| Frontend    | Next.js 14, React |
+| Styling     | TailwindCSS |
+| Language    | TypeScript |
+| Icons/Components | Lucide React |
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/mytreatzz/werent-fe.git
+cd werent-fe
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+pnpm install
+```
+
+### 3. Setup Environment
+
+```bash
+NEXT_PUBLIC_API_URL=
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔗 Demo  
+Live Demo: **https://werent-fe.vercel.app/**  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📸 Screenshots
 
-## Learn More
+### 🛍 Product Detail Page  
+![Product Detail](./public/product-detail-ss.png)
 
-To learn more about Next.js, take a look at the following resources:
+### 📝 Write a Review  
+![Write Review](./public/write-review-ss.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ⭐ Reviews Page  
+![Reviews Page](./public/review-page-ss.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
