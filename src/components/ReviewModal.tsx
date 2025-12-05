@@ -171,16 +171,35 @@ export default function ReviewModal({
 
     const newErrors: Record<string, string> = {};
 
+    // required rating
     if (rating === 0) {
       newErrors.rating = "Please select a rating";
     }
 
+    // required content
     if (content.trim().length < 10) {
       newErrors.content = "Comment must be at least 10 characters";
     } else if (content.trim().length > 1000) {
       newErrors.content = "Comment must not exceed 1000 characters";
     }
 
+    // required fit
+    if (!fit) {
+      newErrors.fit = "Please select how it fits";
+    }
+
+    // required measurement
+    if (!waist) {
+      newErrors.waist = "Waist measurement is required";
+    }
+    if (!bust) {
+      newErrors.bust = "Bust measurement is required";
+    }
+    if (!hips) {
+      newErrors.hips = "Hips measurement is required";
+    }
+
+    // range validation
     if (waist && !validateMeasurement("waist", waist)) {
       // Error already set
     }
@@ -196,9 +215,9 @@ export default function ReviewModal({
       return;
     }
 
-    const parsedWaist = waist ? Number.parseInt(waist) : undefined;
-    const parsedBust = bust ? Number.parseInt(bust) : undefined;
-    const parsedHips = hips ? Number.parseInt(hips) : undefined;
+    const parsedWaist = Number.parseInt(waist);
+    const parsedBust = Number.parseInt(bust);
+    const parsedHips = Number.parseInt(hips);
 
     onSubmit({
       rating,
@@ -264,7 +283,7 @@ export default function ReviewModal({
                     className={`w-8 h-8 ${
                       star <= (hoveredRating || rating)
                         ? "fill-amber-400 text-amber-400"
-                        : "text-gray-300"
+                        : errors.rating ? "text-red-300" : "text-gray-300"
                     }`}
                   />
                 </button>
@@ -329,20 +348,32 @@ export default function ReviewModal({
             <select
               id="fit"
               value={fit}
-              onChange={(e) => setFit(e.target.value as FitType | "")}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer"
+              onChange={(e) => {
+                setFit(e.target.value as FitType | "");
+                clearError("fit");
+              }}
+              className={`w-full px-3 py-2 border ${
+                errors.fit
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-amber-400"
+              } rounded-lg focus:outline-none focus:ring-2  cursor-pointer`}
             >
-              <option value="">Select fit (optional)</option>
+              <option value="" disabled>
+                Select fit
+              </option>
               <option value={FitType.SMALL}>Runs Small</option>
               <option value={FitType.TRUE}>True to Size</option>
               <option value={FitType.LARGE}>Runs Large</option>
             </select>
+            {errors.fit && (
+              <p className="mt-1 text-xs text-red-500">{errors.fit}</p>
+            )}
           </div>
 
           {/* Measurements Section */}
           <div>
             <label className="block text-sm font-semibold mb-3">
-              Measurements (optional)
+              Measurements
             </label>
             <div className="grid grid-cols-3 gap-4">
               <div>
