@@ -12,7 +12,7 @@ export default async function ReviewsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="sticky top-0 bg-white border-b border-gray-200 z-10">
+      <div className="sticky top-0 bg-white border-b border-gray-200 z-10 text-gray-900">
         <div className="flex items-center justify-between p-2.5 max-w-2xl lg:max-w-full mx-auto lg:ml-6">
           <Link href="/" className="p-2 hover:bg-gray-100 rounded">
             <ChevronLeft className="w-6 h-6" />
@@ -25,7 +25,7 @@ export default async function ReviewsPage() {
       </div>
 
       {/* Rating Overview */}
-      <div className="border-b border-gray-200 p-4 max-w-2xl lg:max-w-full mx-auto lg:mx-6">
+      <div className="border-b border-gray-200 p-4 max-w-2xl lg:max-w-full mx-auto lg:mx-6 text-gray-900">
         <div className="flex items-start gap-6 mb-6">
           <div className="text-5xl w-16 text-center font-bold">
             {dataReviewSummary.overallRating.toFixed(1)}
